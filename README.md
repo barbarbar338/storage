@@ -48,7 +48,7 @@ Here is an example file upload request:
             body: formData,
             headers: {
                 "Authorization": "YOUR_SECRET_TOKEN", // see "How to get secret token"
-                "Content-Type": "multipart/formdata
+                "Content-Type": "multipart/formdata"
             }
         });
     });
@@ -69,6 +69,9 @@ Send a GET request to `storage/uploads/:file` endpoint:
 ```
 GET http://localhost:3000/v1/storage/uploads/137312178217811969.png
 ```
+
+# 🚀 Using with ShareX
+You can use the config file I prepared. Just rename `config.sxcu.example` to `config.sxcu` and reconfigure it according to yourself.
 
 # 🤼‍♂️ Contributing
 Feel free to use Github's features
