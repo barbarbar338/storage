@@ -16,15 +16,20 @@ export class AuthGuard implements CanActivate {
 		const token: string =
 			req.headers["authorization"] || req.headers["x-access-token"];
 		if (!token) throw new BadRequestException("invalid access token");
+
 		Jwt.verify(token, CONFIG.SECRET, (err, decoded: Storage.User) => {
 			if (err) throw new BadRequestException("invalid access token");
+
 			this.authService.authenticate({
 				username: decoded.username,
 				password: decoded.password,
 			});
+
 			req.user = decoded;
+
 			return true;
 		});
+
 		return true;
 	}
 }

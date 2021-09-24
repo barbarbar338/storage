@@ -1,5 +1,6 @@
 # 📦 My personal storage
-- Depends on firebase storage
+- Depends on [Supabase](https://supabase.io/) storage
+- Hosted on [Fly](https://fly.io/)
 
 # 🎈 Usage
 - Clone repo
@@ -60,14 +61,14 @@ Example response:
 {
     statusCode: 201,
     message: "File uploaded",
-    data: "http://localhost:3000/v1/storage/uploads/137312178217811969.png",
+    data: "http://localhost:3000/v1/storage/uploads/images/137312178217811969.png",
 };
 ```
 
 # 😎 Get file
-Send a GET request to `storage/uploads/:file` endpoint:
+Send a GET request to `storage/uploads/:folder/:file` endpoint:
 ```
-GET http://localhost:3000/v1/storage/uploads/137312178217811969.png
+GET http://localhost:3000/v1/storage/uploads/images/137312178217811969.png
 ```
 
 # 🚀 Using with ShareX

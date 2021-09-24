@@ -21,6 +21,7 @@ export class AuthService {
 			password,
 			username,
 		});
+
 		return {
 			statusCode: HttpStatus.OK,
 			message: "Successfully logged in",
@@ -39,6 +40,7 @@ export class AuthService {
 			algorithm: "HS512",
 			expiresIn,
 		});
+
 		return {
 			access_token,
 			expiresIn,
@@ -48,22 +50,27 @@ export class AuthService {
 	public authenticate({ username, password }: LoginDTO): boolean {
 		if (username != CONFIG.STORAGE_USERNAME)
 			throw new UnauthorizedException("Invalid username");
+
 		if (password != CONFIG.STORAGE_PASSWORD)
 			throw new UnauthorizedException("Invalid password");
+
 		return true;
 	}
 
 	public getToken({ username, password }: LoginDTO): Storage.AccessTokenData {
 		this.authenticate({ username, password });
+
 		const { access_token, expiresIn } = this.generateToken({
 			password,
 			username,
 		});
+
 		return { access_token, expiresIn };
 	}
 
 	public getMe(user: Storage.User): Storage.APIRes<Storage.User> {
 		this.authenticate(user);
+
 		return {
 			statusCode: HttpStatus.OK,
 			message: "get me",

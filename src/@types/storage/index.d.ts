@@ -14,14 +14,17 @@ declare global {
 			data: T;
 			error?: string;
 		}
+
 		interface AccessTokenData {
 			access_token: string;
 			expiresIn: number;
 		}
+
 		interface User {
 			username: string;
 			password: string;
 		}
+
 		interface MultipartFile {
 			toBuffer: () => Promise<Buffer>;
 			file: NodeJS.ReadableStream;

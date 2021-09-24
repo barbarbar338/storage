@@ -19,6 +19,7 @@ export class StorageController {
 			.split("/")
 			.slice(4)
 			.join("/");
+
 		return this.storageService.getFile(filePath);
 	}
 
