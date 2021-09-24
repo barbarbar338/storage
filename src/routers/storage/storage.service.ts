@@ -8,6 +8,7 @@ import CONFIG from "src/config";
 import { Snowflake } from "@snowflake";
 import { lookup } from "mime-types";
 import { createClient } from "@supabase/supabase-js";
+import { FastifyReply } from "fastify";
 
 @Injectable()
 export class StorageService {
@@ -56,10 +57,13 @@ export class StorageService {
 		};
 	}
 
-	public async getFile(filePath: string): Promise<Buffer> {
+	public async getFile(filePath: string, rep: FastifyReply): Promise<void> {
 		const { error, data } = await this.SupabaseBucket.download(filePath);
 		if (error) throw new NotFoundException(error.message);
 
-		return Buffer.from(await data.arrayBuffer());
+		const mime = lookup(filePath) || "applicaton/octet-stream";
+		rep.header("Content-Type", mime).send(
+			Buffer.from(await data.arrayBuffer()),
+		);
 	}
 }

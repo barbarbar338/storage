@@ -1,8 +1,8 @@
-import { Controller, Get, Post, Req, UseGuards } from "@nestjs/common";
+import { Controller, Get, Post, Req, Res, UseGuards } from "@nestjs/common";
 import { AuthGuard } from "@routers/auth/auth.guard";
 import { StorageService } from "@routers/storage/storage.service";
 import { UploadGuard } from "@routers/storage/upload.guard";
-import { FastifyRequest } from "fastify";
+import { FastifyReply, FastifyRequest } from "fastify";
 import { File } from "./file.decorator";
 
 @Controller("storage")
@@ -14,10 +14,13 @@ export class StorageController {
 	}
 
 	@Get("uploads/*")
-	public async getFile(@Req() req: FastifyRequest): Promise<Buffer> {
+	public async getFile(
+		@Req() req: FastifyRequest,
+		@Res() rep: FastifyReply,
+	): Promise<void> {
 		const filePath = req.url.split("/").slice(4).join("/");
 
-		return this.storageService.getFile(filePath);
+		await this.storageService.getFile(filePath, rep);
 	}
 
 	@Post("upload")
