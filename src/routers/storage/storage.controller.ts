@@ -15,10 +15,7 @@ export class StorageController {
 
 	@Get("uploads/*")
 	public async getFile(@Req() req: FastifyRequest): Promise<Buffer> {
-		const filePath = req.url
-			.split("/")
-			.slice(4)
-			.join("/");
+		const filePath = req.url.split("/").slice(4).join("/");
 
 		return this.storageService.getFile(filePath);
 	}

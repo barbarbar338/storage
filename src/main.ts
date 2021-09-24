@@ -16,11 +16,7 @@ async function bootstrap() {
 		new FastifyAdapter(),
 	);
 
-	app
-		.getHttpAdapter()
-		.getInstance()
-		.register(multipart)
-		.register(helmet);
+	app.getHttpAdapter().getInstance().register(multipart).register(helmet);
 
 	app.enableCors();
 
