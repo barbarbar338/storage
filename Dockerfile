@@ -1,6 +1,6 @@
-FROM debian
+FROM node:16-alpine3.14
 
-RUN apt-get update && apt-get upgrade && apt-get install -y curl software-properties-common git make python gcc g++ && curl -sL https://deb.nodesource.com/setup_16.x | bash - && apt-get install -y nodejs && apt-get clean
+RUN apk add --no-cache git make python3 py3-pip gcc g++
 
 ENV PORT=8080
 
@@ -10,6 +10,6 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm i -g yarn && yarn && yarn build
+RUN yarn && yarn build
 
 CMD ["yarn", "start"]
