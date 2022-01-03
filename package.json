@@ -24,6 +24,7 @@
         "@nestjs/common": "^8.0.7",
         "@nestjs/core": "^8.0.7",
         "@nestjs/platform-fastify": "^8.0.7",
+        "@nestjs/sequelize": "^8.0.0",
         "@supabase/supabase-js": "^1.23.0",
         "class-transformer": "^0.4.0",
         "class-validator": "^0.13.1",
@@ -35,9 +36,13 @@
         "mime-types": "^2.1.32",
         "morgan": "^1.10.0",
         "nestjs-rate-limit": "^1.1.1",
+        "pg": "^8.7.1",
+        "pg-hstore": "^2.3.4",
         "reflect-metadata": "^0.1.13",
         "rimraf": "^3.0.2",
-        "rxjs": "^7.3.0"
+        "rxjs": "^7.3.0",
+        "sequelize": "^7.0.0-alpha.4",
+        "sequelize-typescript": "^2.1.1"
     },
     "devDependencies": {
         "@nestjs/cli": "^8.1.1",

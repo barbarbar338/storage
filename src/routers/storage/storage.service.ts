@@ -7,18 +7,12 @@ import {
 import CONFIG from "src/config";
 import { Snowflake } from "@snowflake";
 import { lookup } from "mime-types";
-import { createClient } from "@supabase/supabase-js";
 import { FastifyReply } from "fastify";
+import { storageBucket } from "@supabase";
 
 @Injectable()
 export class StorageService {
 	constructor(private readonly snowflake: Snowflake) {}
-
-	private readonly Supabase = createClient(
-		CONFIG.SUPABASE.public_url,
-		CONFIG.SUPABASE.public_anon_key,
-	);
-	private SupabaseBucket = this.Supabase.storage.from("uploads");
 
 	public returnPing(): Storage.APIRes<null> {
 		return {
@@ -45,7 +39,7 @@ export class StorageService {
 		const mime = lookup(extension) || "applicaton/octet-stream";
 		const path = `${this.decideFolder(mime)}/${id}.${extension}`;
 
-		const { error } = await this.SupabaseBucket.upload(path, buffer, {
+		const { error } = await storageBucket.upload(path, buffer, {
 			contentType: mime,
 		});
 		if (error) throw new InternalServerErrorException(error.message);
@@ -58,7 +52,7 @@ export class StorageService {
 	}
 
 	public async getFile(filePath: string, rep: FastifyReply): Promise<void> {
-		const { error, data } = await this.SupabaseBucket.download(filePath);
+		const { error, data } = await storageBucket.download(filePath);
 		if (error) throw new NotFoundException(error.message);
 
 		const mime = lookup(filePath) || "applicaton/octet-stream";

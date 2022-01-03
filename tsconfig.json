@@ -14,9 +14,9 @@
 		"skipLibCheck": true,
 		"paths": {
 			"@snowflake": [ "libs/snowflake" ],
-			"@crypto": [ "libs/crypto" ],
-			"@randomstring": [ "libs/randomstring" ],
+			"@supabase": [ "libs/supabase" ],
 			"@routers/*": [ "src/routers/*" ],
+			"@models/*": [ "src/models/*" ],
 		}
 	}
 }
