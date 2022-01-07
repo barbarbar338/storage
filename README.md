@@ -2,7 +2,8 @@
 A system where you can share your files publicly on the internet. Upload your files and share them with anyone with a permanent url!
 - Depends on [Supabase](https://supabase.io/) storage
 - Hosted on [Fly](https://fly.io/)
-
+- Chrome extension: [Click!](https://github.com/barbarbar338/storage-chrome-extension)
+- 
 # 🎁 Example
 `https://storage.fly.dev/v1/storage/uploads/images/217324892209676293.png`
 ![example](https://storage.fly.dev/v1/storage/uploads/images/217324892209676293.png)
