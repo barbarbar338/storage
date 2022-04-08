@@ -1,11 +1,11 @@
 {
     "Version": "13.3.0",
     "Name": "YOUR_DOMAIN_HERE",
-    "DestinationType": "ImageUploader, TextUploader, FileUploader",
+    "DestinationType": "ImageUploader, FileUploader",
     "RequestMethod": "POST",
     "RequestURL": "https://YOUR_DOMAIN_HERE/v1/storage/upload",
     "Headers": {
-    "Authorization": "YOUR_AUTH_TOKEN"
+        "Authorization": "YOUR_AUTH_TOKEN"
     },
     "Body": "MultipartFormData",
     "FileFormName": "file",
