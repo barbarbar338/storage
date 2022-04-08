@@ -6,8 +6,9 @@ import { PingModule } from "@routers/ping/ping.module";
 import { AuthModule } from "@routers/auth/auth.module";
 import { StorageModule } from "@routers/storage/storage.module";
 import { BookmarkModule } from "@routers/bookmark/bookmark.module";
-import CONFIG from "src/config";
 import { SequelizeModule } from "@nestjs/sequelize";
+import { ShortenModule } from "@routers/shorten/shorten.module";
+import CONFIG from "src/config";
 
 @Module({
 	imports: [
@@ -26,6 +27,7 @@ import { SequelizeModule } from "@nestjs/sequelize";
 		AuthModule,
 		StorageModule,
 		BookmarkModule,
+		ShortenModule,
 	],
 	controllers: [AppController],
 	providers: [{ provide: APP_GUARD, useClass: RateLimiterGuard }],

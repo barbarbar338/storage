@@ -1,6 +1,6 @@
 import { IsDefined, IsNumberString } from "class-validator";
 
-export abstract class DeleteBookmarkDTO {
+export abstract class DeleteURLDTO {
 	@IsDefined()
 	@IsNumberString()
 	id: number;
