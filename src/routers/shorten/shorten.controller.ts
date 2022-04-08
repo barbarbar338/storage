@@ -1,10 +1,11 @@
 import { Body, Controller, Delete, Get, Post, UseGuards } from "@nestjs/common";
 import { AuthGuard } from "@routers/auth/auth.guard";
+import CONFIG from "src/config";
 import { DeleteURLDTO } from "./dto/delete-url.dto";
 import { ShortenDTO } from "./dto/shorten.dto";
 import { ShortenService } from "./shorten.service";
 
-@Controller("shorten")
+@Controller(CONFIG.API_VERSION + "/shorten")
 export class ShortenController {
 	constructor(private readonly shortenService: ShortenService) {}
 

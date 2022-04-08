@@ -1,7 +1,8 @@
 import { Controller, Get } from "@nestjs/common";
 import { PingService } from "@routers/ping/ping.service";
+import CONFIG from "src/config";
 
-@Controller("ping")
+@Controller(CONFIG.API_VERSION + "/ping")
 export class PingController {
 	constructor(private readonly pingService: PingService) {}
 

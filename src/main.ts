@@ -28,7 +28,8 @@ async function bootstrap() {
 		}),
 	);
 
-	app.setGlobalPrefix(CONFIG.API_VERSION);
+	// we can't use this line of code because of url shortener i guess. Lemme check sometihg later
+	//app.setGlobalPrefix(CONFIG.API_VERSION);
 
 	await app.listen(CONFIG.PORT, "0.0.0.0");
 }

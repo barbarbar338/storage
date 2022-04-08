@@ -4,8 +4,9 @@ import { AuthGuard } from "@routers/auth/auth.guard";
 import { BookmarkService } from "@routers/bookmark/bookmark.service";
 import { BookmarkDTO } from "@routers/bookmark/dto/bookmark.dto";
 import { DeleteBookmarkDTO } from "@routers/bookmark/dto/delete-bookmark.dto";
+import CONFIG from "src/config";
 
-@Controller("bookmark")
+@Controller(CONFIG.API_VERSION + "/bookmark")
 export class BookmarkController {
 	constructor(private readonly bookmarkService: BookmarkService) {}
 

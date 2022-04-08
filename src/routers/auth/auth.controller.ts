@@ -3,8 +3,9 @@ import { AuthService } from "@routers/auth/auth.service";
 import { LoginDTO } from "@routers/auth/dto/login.dto";
 import { AuthGuard } from "@routers/auth/auth.guard";
 import { User } from "@routers/auth/user.decorator";
+import CONFIG from "src/config";
 
-@Controller("auth")
+@Controller(CONFIG.API_VERSION + "/auth")
 export class AuthController {
 	constructor(private readonly authService: AuthService) {}
 

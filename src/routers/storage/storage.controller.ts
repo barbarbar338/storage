@@ -3,9 +3,10 @@ import { AuthGuard } from "@routers/auth/auth.guard";
 import { StorageService } from "@routers/storage/storage.service";
 import { UploadGuard } from "@routers/storage/upload.guard";
 import { FastifyReply, FastifyRequest } from "fastify";
+import CONFIG from "src/config";
 import { File } from "./file.decorator";
 
-@Controller("storage")
+@Controller(CONFIG.API_VERSION + "/storage")
 export class StorageController {
 	constructor(private readonly storageService: StorageService) {}
 	@Get()
