@@ -13,10 +13,10 @@
 		"incremental": true,
 		"skipLibCheck": true,
 		"paths": {
-			"@snowflake": [ "libs/snowflake" ],
-			"@supabase": [ "libs/supabase" ],
-			"@routers/*": [ "src/routers/*" ],
-			"@models/*": [ "src/models/*" ],
+			"@snowflake": ["libs/snowflake"],
+			"@supabase": ["libs/supabase"],
+			"@routers/*": ["src/routers/*"],
+			"@models/*": ["src/models/*"]
 		}
 	}
 }
