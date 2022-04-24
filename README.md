@@ -114,3 +114,9 @@ You can use the config file I prepared. Just rename `config.sxcu.example` to `co
 # 🤼‍♂️ Contributing
 
 Feel free to use Github's features
+
+# 📄 TODO
+
+-   ❌ Upload files to Discord / Telegram
+-   ❌ Send shortened links to Discord / Telegram
+-   ❌ Send bookmark data to Discord / Telegram

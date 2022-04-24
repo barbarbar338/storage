@@ -19,6 +19,10 @@ const CONFIG = {
 		password: process.env.POSTGRES_PASSWORD,
 		database: process.env.POSTGRES_DB,
 	},
+	DISCORD: {
+		id: process.env.DISCORD_WEBHOOK_ID as string,
+		token: process.env.DISCORD_WEBHOOK_TOKEN as string,
+	},
 };
 
 export default CONFIG;

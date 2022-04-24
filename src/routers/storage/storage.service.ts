@@ -9,9 +9,15 @@ import { Snowflake } from "@snowflake";
 import { lookup } from "mime-types";
 import { FastifyReply } from "fastify";
 import { storageBucket } from "@supabase";
+import { WebhookClient } from "discord.js";
 
 @Injectable()
 export class StorageService {
+	private readonly webhook = new WebhookClient({
+		id: CONFIG.DISCORD.id,
+		token: CONFIG.DISCORD.token,
+	});
+
 	constructor(private readonly snowflake: Snowflake) {}
 
 	public returnPing(): Storage.APIRes<null> {
@@ -43,6 +49,11 @@ export class StorageService {
 			contentType: mime,
 		});
 		if (error) throw new InternalServerErrorException(error.message);
+
+		if (this.webhook.token)
+			await this.webhook.send({
+				content: `${CONFIG.SITE_URL}/${CONFIG.API_VERSION}/storage/uploads/${path} uploaded`,
+			});
 
 		return {
 			statusCode: HttpStatus.CREATED,
