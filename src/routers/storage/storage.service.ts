@@ -9,11 +9,11 @@ import { Snowflake } from "@snowflake";
 import { lookup } from "mime-types";
 import { FastifyReply } from "fastify";
 import { storageBucket } from "@supabase";
-import { WebhookClient } from "discord.js";
+import { MessageAttachment, WebhookClient } from "discord.js";
 
 @Injectable()
 export class StorageService {
-	private readonly webhook = new WebhookClient({
+	private webhook = new WebhookClient({
 		id: CONFIG.DISCORD.id,
 		token: CONFIG.DISCORD.token,
 	});
@@ -50,10 +50,19 @@ export class StorageService {
 		});
 		if (error) throw new InternalServerErrorException(error.message);
 
-		if (this.webhook.token)
-			await this.webhook.send({
-				content: `${CONFIG.SITE_URL}/${CONFIG.API_VERSION}/storage/uploads/${path} uploaded`,
-			});
+		if (this.webhook && this.webhook.token) {
+			const size = Buffer.byteLength(buffer) / 1024 / 1024;
+			const attachment = new MessageAttachment(buffer, path);
+			await this.webhook
+				.send({
+					content: `${CONFIG.SITE_URL}/${CONFIG.API_VERSION}/storage/uploads/${path} uploaded`,
+					files: [size < 8 ? attachment : null],
+				})
+				.catch((err) => {
+					this.webhook = null;
+					console.error(`Disabled webhook, reason: ${err}`);
+				});
+		}
 
 		return {
 			statusCode: HttpStatus.CREATED,
