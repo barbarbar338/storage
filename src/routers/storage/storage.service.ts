@@ -9,16 +9,15 @@ import { Snowflake } from "@snowflake";
 import { lookup } from "mime-types";
 import { FastifyReply } from "fastify";
 import { storageBucket } from "@supabase";
-import { MessageAttachment, WebhookClient } from "discord.js";
+import { MessageAttachment } from "discord.js";
+import { Webhook } from "@webhook";
 
 @Injectable()
 export class StorageService {
-	private webhook = new WebhookClient({
-		id: CONFIG.DISCORD.id,
-		token: CONFIG.DISCORD.token,
-	});
-
-	constructor(private readonly snowflake: Snowflake) {}
+	constructor(
+		private readonly snowflake: Snowflake,
+		private readonly webhook: Webhook,
+	) {}
 
 	public returnPing(): Storage.APIRes<null> {
 		return {
@@ -50,18 +49,13 @@ export class StorageService {
 		});
 		if (error) throw new InternalServerErrorException(error.message);
 
-		if (this.webhook && this.webhook.token) {
+		if (this.webhook.canSend()) {
 			const size = Buffer.byteLength(buffer) / 1024 / 1024;
 			const attachment = new MessageAttachment(buffer, path);
-			await this.webhook
-				.send({
-					content: `${CONFIG.SITE_URL}/${CONFIG.API_VERSION}/storage/uploads/${path} uploaded`,
-					files: [size < 8 ? attachment : null],
-				})
-				.catch((err) => {
-					this.webhook = null;
-					console.error(`Disabled webhook, reason: ${err}`);
-				});
+			await this.webhook.send({
+				content: `${CONFIG.SITE_URL}/${CONFIG.API_VERSION}/storage/uploads/${path} uploaded`,
+				files: [size < 8 ? attachment : null],
+			});
 		}
 
 		return {
