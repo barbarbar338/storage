@@ -2,6 +2,8 @@ import { URLModel } from "@models/url.model";
 import { BadRequestException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { Snowflake } from "@snowflake";
+import { Webhook } from "@webhook";
+import { MessageEmbed } from "discord.js";
 import CONFIG from "src/config";
 import { DeleteURLDTO } from "./dto/delete-url.dto";
 import { ShortenDTO } from "./dto/shorten.dto";
@@ -15,6 +17,7 @@ export class ShortenService {
 		@InjectModel(URLModel)
 		private readonly urlModel: typeof URLModel,
 		private readonly snowflake: Snowflake,
+		private readonly webhook: Webhook,
 	) {}
 
 	public async shorten({
@@ -32,6 +35,18 @@ export class ShortenService {
 			url,
 			code,
 		});
+
+		if (this.webhook.canSend()) {
+			const embed = new MessageEmbed()
+				.addField("Long URL", url)
+				.addField("Short URL", `${CONFIG.SITE_URL}/${urlModel.code}`)
+				.setColor("BLURPLE");
+
+			await this.webhook.send({
+				content: `${url} shortened`,
+				embeds: [embed],
+			});
+		}
 
 		return {
 			message: "URL successfully shortened",

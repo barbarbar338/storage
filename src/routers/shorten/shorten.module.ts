@@ -3,13 +3,14 @@ import { Module } from "@nestjs/common";
 import { SequelizeModule } from "@nestjs/sequelize";
 import { AuthModule } from "@routers/auth/auth.module";
 import { Snowflake } from "@snowflake";
+import { Webhook } from "@webhook";
 import { ShortenController } from "./shorten.controller";
 import { ShortenService } from "./shorten.service";
 
 @Module({
 	imports: [SequelizeModule.forFeature([URLModel]), AuthModule],
 	controllers: [ShortenController],
-	providers: [ShortenService, Snowflake],
+	providers: [ShortenService, Snowflake, Webhook],
 	exports: [SequelizeModule, ShortenService],
 })
 export class ShortenModule {}

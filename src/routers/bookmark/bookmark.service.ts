@@ -3,12 +3,15 @@ import { InjectModel } from "@nestjs/sequelize";
 import { BookmarkModel } from "@models/bookmark.model";
 import { BookmarkDTO } from "@routers/bookmark/dto/bookmark.dto";
 import { DeleteBookmarkDTO } from "@routers/bookmark/dto/delete-bookmark.dto";
+import { Webhook } from "@webhook";
+import { MessageEmbed } from "discord.js";
 
 @Injectable()
 export class BookmarkService {
 	constructor(
 		@InjectModel(BookmarkModel)
 		private readonly bookmarkModel: typeof BookmarkModel,
+		private readonly webhook: Webhook,
 	) {}
 
 	public async bookmark({
@@ -23,6 +26,22 @@ export class BookmarkService {
 			title,
 			url,
 		});
+
+		if (this.webhook.canSend()) {
+			const embed = new MessageEmbed()
+				.setAuthor({
+					name: title,
+					iconURL: imageUrl,
+					url,
+				})
+				.setDescription(description)
+				.setColor("BLURPLE");
+
+			await this.webhook.send({
+				content: `${url} bookmarked`,
+				embeds: [embed],
+			});
+		}
 
 		return {
 			statusCode: HttpStatus.OK,

@@ -118,5 +118,5 @@ Feel free to use Github's features
 # 📄 TODO
 
 -   ❌ Upload files to Telegram
--   ❌ Send shortened links to Discord / Telegram
--   ❌ Send bookmark data to Discord / Telegram
+-   ❌ Send shortened links to Telegram
+-   ❌ Send bookmark data to Telegram
