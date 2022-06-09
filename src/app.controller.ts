@@ -5,7 +5,7 @@ import { ShortenService } from "@routers/shorten/shorten.service";
 export class AppController {
 	constructor(private readonly shortenService: ShortenService) {}
 
-	@Get()
+	@Get("ping")
 	public returnPing(): Storage.APIRes<null> {
 		return {
 			statusCode: HttpStatus.OK,
@@ -15,10 +15,10 @@ export class AppController {
 	}
 
 	@Get(":code")
-	@Redirect("/", HttpStatus.NOT_FOUND)
+	@Redirect()
 	public async redirect(
 		@Param("code") code: string,
-	): Promise<{ url: string }> {
+	): Promise<{ statusCode: number; url: string }> {
 		return this.shortenService.redirect(code);
 	}
 }

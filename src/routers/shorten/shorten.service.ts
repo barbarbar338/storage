@@ -62,11 +62,14 @@ export class ShortenService {
 		};
 	}
 
-	public async redirect(code: string): Promise<{ url: string }> {
+	public async redirect(
+		code: string,
+	): Promise<{ url: string; statusCode: number }> {
 		const model = await this.urlModel.findOne({ where: { code } });
 		if (!model) throw new BadRequestException("URL not found");
 		return {
 			url: model.url,
+			statusCode: HttpStatus.TEMPORARY_REDIRECT,
 		};
 	}
 }

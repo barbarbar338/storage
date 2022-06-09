@@ -3,6 +3,8 @@ export {};
 declare module "fastify" {
 	interface FastifyRequest {
 		incomingFile: Storage.MultipartFile;
+		isMultipart: () => boolean;
+		file: () => Promise<Storage.MultipartFile>;
 	}
 }
 
