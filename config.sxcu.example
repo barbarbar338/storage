@@ -3,7 +3,7 @@
     "Name": "YOUR_DOMAIN_HERE",
     "DestinationType": "ImageUploader, FileUploader",
     "RequestMethod": "POST",
-    "RequestURL": "https://YOUR_DOMAIN_HERE/upload",
+    "RequestURL": "https://YOUR_DOMAIN_HERE/storage/upload",
     "Headers": {
         "X-Storage-Username": "YOUR_STORAGE_USERNAME",
         "X-Storage-Password": "YOUR_STORAGE_PASSWORD"
