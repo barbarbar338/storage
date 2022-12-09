@@ -4,7 +4,7 @@
 	"description": "Cloudflare worker for my personal storage",
 	"scripts": {
 		"dev": "wrangler dev",
-		"publish": "wrangler publish",
+		"deploy": "wrangler publish",
 		"format": "prettier --write  .",
 		"lint": "eslint --max-warnings=0 . && prettier --check ."
 	},
