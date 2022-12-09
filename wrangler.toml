@@ -1,5 +1,6 @@
 main = "./src/index.ts"
 name = "storage-worker"
+compatibility_date = "2022-12-09"
 
 [vars]
 BASE_URL = "https://worker.338.rocks"
