@@ -1,7 +1,7 @@
 import { status, ThrowableRouter } from "itty-router-extras";
 import { decideFolder } from "../libs/decideFolder";
 import { Snowflake } from "../libs/snowflake";
-import { storageBucket } from "../libs/supabase";
+import { supabaseClient } from "../libs/supabase";
 
 export const storageRouter = ThrowableRouter({
 	base: "/storage",
@@ -11,7 +11,9 @@ export const storageRouter = ThrowableRouter({
 		const { pathname } = new URL(req.url);
 		const path = pathname.slice("/storage/uploads/".length);
 
-		const { error, data } = await storageBucket.download(path);
+		const { error, data } = await supabaseClient.storage
+			.from("uploads")
+			.download(path);
 		if (error) return status(404, `${path} not found`);
 
 		return new Response(data);
@@ -44,9 +46,11 @@ export const storageRouter = ThrowableRouter({
 		const id = Snowflake.generate();
 		const path = `${decideFolder(file.type)}/${id}${extension}`;
 
-		const { error } = await storageBucket.upload(path, file, {
-			contentType: file.type,
-		});
+		const { error } = await supabaseClient.storage
+			.from("uploads")
+			.upload(path, file, {
+				contentType: file.type,
+			});
 
 		if (error) return status(500, "internal server error");
 

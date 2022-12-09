@@ -42,8 +42,7 @@ export const Snowflake = {
 		if (this.INCREMENT >= 4095) this.INCREMENT = 0;
 		const BINARY = `${(timestamp - this.EPOCH)
 			.toString(2)
-			.padStart(42, "0")}0000100000${(this
-			.INCREMENT++)
+			.padStart(42, "0")}0000100000${(this.INCREMENT++)
 			.toString(2)
 			.padStart(12, "0")}`;
 		return this.binaryToID(BINARY);
@@ -55,24 +54,13 @@ export const Snowflake = {
 		increment: number;
 		binary: string;
 	} {
-		const BINARY = this.idToBinary(snowflake).padStart(
-			64,
-			"0",
-		);
-		const timestamp =
-			parseInt(BINARY.substring(0, 42), 2) +
-			this.EPOCH;
+		const BINARY = this.idToBinary(snowflake).padStart(64, "0");
+		const timestamp = parseInt(BINARY.substring(0, 42), 2) + this.EPOCH;
 		const res = {
 			timestamp,
 			workerID: parseInt(BINARY.substring(42, 47), 2),
-			processID: parseInt(
-				BINARY.substring(47, 52),
-				2,
-			),
-			increment: parseInt(
-				BINARY.substring(52, 64),
-				2,
-			),
+			processID: parseInt(BINARY.substring(47, 52), 2),
+			increment: parseInt(BINARY.substring(52, 64), 2),
 			binary: BINARY,
 		};
 		return res;
@@ -80,11 +68,7 @@ export const Snowflake = {
 	isSnowflake(snowflake: string): boolean {
 		const deconstructed = this.deconstruct(snowflake);
 		const timestamp = deconstructed.timestamp;
-		if (
-			timestamp > this.EPOCH &&
-			timestamp <= 3619093655551
-		)
-			return true;
+		if (timestamp > this.EPOCH && timestamp <= 3619093655551) return true;
 		return false;
 	},
 };
