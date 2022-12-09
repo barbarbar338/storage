@@ -3,12 +3,13 @@
     "Name": "YOUR_DOMAIN_HERE",
     "DestinationType": "ImageUploader, FileUploader",
     "RequestMethod": "POST",
-    "RequestURL": "https://YOUR_DOMAIN_HERE/v1/storage/upload",
+    "RequestURL": "https://YOUR_DOMAIN_HERE/upload",
     "Headers": {
-        "Authorization": "YOUR_AUTH_TOKEN"
+        "X-Storage-Username": "YOUR_STORAGE_USERNAME",
+        "X-Storage-Password": "YOUR_STORAGE_PASSWORD"
     },
     "Body": "MultipartFormData",
     "FileFormName": "file",
-    "URL": "$json:data$",
+    "URL": "$json:message$",
     "ErrorMessage": "$json:message$"
 }
