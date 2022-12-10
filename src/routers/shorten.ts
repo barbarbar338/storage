@@ -46,8 +46,6 @@ export const shortenRouter = ThrowableRouter({
 		const payload = {
 			url: json.url,
 			code,
-			createdAt: new Date().toISOString(),
-			updatedAt: new Date().toISOString(),
 		};
 
 		const { error } = await supabaseClient

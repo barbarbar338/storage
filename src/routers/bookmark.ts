@@ -40,8 +40,6 @@ export const bookmarkRouter = ThrowableRouter({
 			title: json.title,
 			description: json.description,
 			imageUrl: json.imageUrl,
-			createdAt: new Date().toISOString(),
-			updatedAt: new Date().toISOString(),
 		};
 
 		const { error } = await supabaseClient
