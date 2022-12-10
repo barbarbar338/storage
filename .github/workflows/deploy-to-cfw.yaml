@@ -1,17 +1,44 @@
-name: Deploy
+name: Deploy to Cloudflare Workers
 
 on:
     push:
         branches:
             - main
-
 jobs:
-    deploy:
+    build:
         runs-on: ubuntu-latest
-        name: Deploy
+
         steps:
-            - uses: actions/checkout@v2
-            - name: Publish
+            - name: Checkout
+              uses: actions/checkout@v3
+              with:
+                  persist-credentials: false
+
+            - name: Use Node.js 16
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+
+            - name: Cache node_modules
+              uses: actions/cache@v3
+              env:
+                  cache-name: node-modules
+              with:
+                  path: node_modules
+                  key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }}
+
+            - name: Cache workers-site/node_modules
+              uses: actions/cache@v3
+              env:
+                  cache-name: workers-site-node-modules
+              with:
+                  path: workers-site/node_modules
+                  key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('workers-site/package-lock.json') }}
+
+            - run: npm i
+            - run: npm run build
+
+            - name: Deploy to Cloudflare Workers
               uses: cloudflare/wrangler-action@2.0.0
               with:
-                  apiToken: ${{ secrets.CF_API_TOKEN }}
+                  apiToken: ${{ secrets.CF_WORKERS_TOKEN }}
