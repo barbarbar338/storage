@@ -36,7 +36,6 @@ jobs:
                   key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('workers-site/package-lock.json') }}
 
             - run: npm i
-            - run: npm run build
 
             - name: Deploy to Cloudflare Workers
               uses: cloudflare/wrangler-action@2.0.0
