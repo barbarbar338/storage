@@ -1,6 +1,8 @@
 import { status, ThrowableRouter } from "itty-router-extras";
 import { Snowflake } from "../libs/snowflake";
 import { supabaseClient } from "../libs/supabase";
+import { auth } from "../middlewares/auth";
+import { contentType } from "../middlewares/contentType";
 
 export const shortenRouter = ThrowableRouter({
 	base: "/shorten",
@@ -15,19 +17,8 @@ export const shortenRouter = ThrowableRouter({
 
 		return status(201, urls);
 	})
-	.post("/", async (req) => {
-		const request = new Request(req.url, req);
-
-		const mime = request.headers.get("content-type");
-		if (!mime || !mime.startsWith("application/json"))
-			return status(400, "invalid content type");
-
-		const username = request.headers.get("X-Storage-Username");
-		const password = request.headers.get("X-Storage-Password");
-		if (username != USERNAME || password != PASSWORD)
-			return status(401, "unauthorized");
-
-		const json = await request.json<{
+	.post("/", auth, contentType("application/json"), async (req) => {
+		const json = await req.json<{
 			url: string;
 			code: string;
 		}>();
@@ -50,8 +41,6 @@ export const shortenRouter = ThrowableRouter({
 			.eq("code", code)
 			.single();
 
-		console.log(codeExists);
-
 		if (codeExists) return status(400, "code already exists");
 
 		const payload = {
@@ -61,14 +50,37 @@ export const shortenRouter = ThrowableRouter({
 			updatedAt: new Date().toISOString(),
 		};
 
-		const { data: newUrl, error } = await supabaseClient
+		const { error } = await supabaseClient
 			.from("urls")
 			.insert([payload])
 			.single();
 
-		console.log(newUrl);
-
 		if (error) return status(500, "internal server error");
 
+		await fetch(DISCORD_WEBHOOK_URL, {
+			body: JSON.stringify({
+				content: `${json.url} shortened`,
+				embeds: [
+					{
+						fields: [
+							{
+								name: "Long URL",
+								value: json.url,
+							},
+							{
+								name: "Short URL",
+								value: `${BASE_URL}/${code}`,
+							},
+						],
+						color: 7506394,
+					},
+				],
+			}),
+			headers: {
+				"Content-Type": "application/json",
+			},
+			method: "POST",
+		});
+
 		return status(201, payload);
-	});
+	}).handle;

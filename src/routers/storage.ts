@@ -2,6 +2,8 @@ import { status, ThrowableRouter } from "itty-router-extras";
 import { decideFolder } from "../libs/decideFolder";
 import { Snowflake } from "../libs/snowflake";
 import { supabaseClient } from "../libs/supabase";
+import { auth } from "../middlewares/auth";
+import { contentType } from "../middlewares/contentType";
 
 export const storageRouter = ThrowableRouter({
 	base: "/storage",
@@ -18,19 +20,8 @@ export const storageRouter = ThrowableRouter({
 
 		return new Response(data);
 	})
-	.post("/upload", async (req) => {
-		const request = new Request(req.url, req);
-
-		const mime = request.headers.get("content-type");
-		if (!mime || !mime.startsWith("multipart/form-data"))
-			return status(400, "invalid content type");
-
-		const username = request.headers.get("X-Storage-Username");
-		const password = request.headers.get("X-Storage-Password");
-		if (username != USERNAME || password != PASSWORD)
-			return status(401, "unauthorized");
-
-		const formData = await request.formData();
+	.post("/upload", auth, contentType("multipart/form-data"), async (req) => {
+		const formData = await req.formData();
 
 		if (!formData.has("file")) return status(400, "no file");
 
@@ -54,5 +45,15 @@ export const storageRouter = ThrowableRouter({
 
 		if (error) return status(500, "internal server error");
 
+		await fetch(DISCORD_WEBHOOK_URL, {
+			body: JSON.stringify({
+				content: `${BASE_URL}/storage/uploads/${path} uploaded`,
+			}),
+			headers: {
+				"Content-Type": "application/json",
+			},
+			method: "POST",
+		});
+
 		return status(201, `${BASE_URL}/storage/uploads/${path}`);
-	});
+	}).handle;
