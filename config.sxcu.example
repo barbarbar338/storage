@@ -10,6 +10,6 @@
     },
     "Body": "MultipartFormData",
     "FileFormName": "file",
-    "URL": "$json:message$",
+    "URL": "$json:data$",
     "ErrorMessage": "$json:message$"
 }

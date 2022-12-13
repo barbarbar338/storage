@@ -113,8 +113,9 @@ Example response:
 
 ```js
 {
-	"status": 201,
-	"message": "http://localhost:8787/storage/uploads/images/374527004130803712.png"
+	"statusCode": 201,
+	"message": "file uploaded",
+	"data": "http://localhost:8787/storage/uploads/images/374527004130803712.png"
 }
 ```
 
@@ -175,10 +176,14 @@ Example response:
 
 ```js
 {
-	"url": "https://example.com",
-	"title": "Example Website",
-	"description": "An example website to test things out",
-	"imageUrl": "https://via.placeholder.com/150"
+	"statusCode": 201,
+	"message": "bookmark created",
+	"data": {
+		"url": "https://example.com",
+		"title": "Example Website",
+		"description": "An example website to test things out",
+		"imageUrl": "https://via.placeholder.com/150"
+	}
 }
 ```
 
@@ -194,20 +199,24 @@ Example response:
 
 ```js
 {
-	"0": {
-		"id": 1,
-		"url": "https://example.com",
-		"title": "Example Website",
-		"description": "An example website to test things out",
-		"imageUrl": "https://via.placeholder.com/150"
-	},
-	"1": {
-		"id": 2,
-		"url": "https://example.com",
-		"title": "Example Website",
-		"description": "An example website to test things out",
-		"imageUrl": "https://via.placeholder.com/150"
-	}
+	"statusCode": 200,
+	"message": "Get all bookmarks",
+	"data": [
+		{
+			"id": 0,
+			"url": "https://example.com",
+			"title": "Example Website",
+			"description": "An example website to test things out",
+			"imageUrl": "https://via.placeholder.com/150"
+		},
+		{
+			"id": 1,
+			"url": "https://example.com",
+			"title": "Example Website",
+			"description": "An example website to test things out",
+			"imageUrl": "https://via.placeholder.com/150"
+		}
+	]
 }
 ```
 

@@ -1,35 +1,58 @@
-import { status, ThrowableRouter } from "itty-router-extras";
+import {
+	BadRequestException,
+	Controller,
+	Get,
+	HTTPStatus,
+	InternalServerErrorException,
+	Middleware,
+	NotFoundException,
+	PayloadTooLargeException,
+	Post,
+	type APIRes,
+} from "sidra";
 import { decideFolder } from "../libs/decideFolder";
 import { Snowflake } from "../libs/snowflake";
 import { supabaseClient } from "../libs/supabase";
 import { auth } from "../middlewares/auth";
 import { contentType } from "../middlewares/contentType";
 
-export const storageRouter = ThrowableRouter({
-	base: "/storage",
-})
-	.get("/", () => status(200, "Hello, world! (Storage)"))
-	.get("/uploads/*", async (req) => {
+@Controller("/storage")
+export class StorageController {
+	@Get()
+	get(): APIRes<string> {
+		return {
+			data: "storage",
+			message: "Hello, world!",
+			statusCode: HTTPStatus.OK,
+		};
+	}
+
+	@Get("uploads/*")
+	async getUploads(req: Request): Promise<Blob> {
 		const { pathname } = new URL(req.url);
 		const path = pathname.slice("/storage/uploads/".length);
 
 		const { error, data } = await supabaseClient.storage
 			.from("uploads")
 			.download(path);
-		if (error) return status(404, `${path} not found`);
 
-		return new Response(data);
-	})
-	.post("/upload", auth, contentType("multipart/form-data"), async (req) => {
+		if (error) throw new NotFoundException(`${path} not found`);
+
+		return data;
+	}
+
+	@Middleware(auth, contentType("multipart/form-data"))
+	@Post("/upload")
+	async postUpload(req: Request): Promise<APIRes<unknown>> {
 		const formData = await req.formData();
 
-		if (!formData.has("file")) return status(400, "no file");
+		if (!formData.has("file")) throw new BadRequestException("no file");
 
 		const file = formData.get("file");
-		if (!(file instanceof File)) return status(400, "no file");
+		if (!(file instanceof File)) throw new BadRequestException("no file");
 
 		if (file.size > parseInt(MAX_FILE_SIZE))
-			return status(400, "max size exceeded");
+			throw new PayloadTooLargeException("file too large");
 
 		const extension = (file.name.match(/\.([0-9a-z]+)(?:[?#]|$)/) || [
 			"",
@@ -43,7 +66,8 @@ export const storageRouter = ThrowableRouter({
 				contentType: file.type,
 			});
 
-		if (error) return status(500, "internal server error");
+		if (error)
+			throw new InternalServerErrorException("internal server error");
 
 		await fetch(DISCORD_WEBHOOK_URL, {
 			body: JSON.stringify({
@@ -55,5 +79,10 @@ export const storageRouter = ThrowableRouter({
 			method: "POST",
 		});
 
-		return status(201, `${BASE_URL}/storage/uploads/${path}`);
-	}).handle;
+		return {
+			data: `${BASE_URL}/storage/uploads/${path}`,
+			message: "file uploaded",
+			statusCode: HTTPStatus.CREATED,
+		};
+	}
+}
