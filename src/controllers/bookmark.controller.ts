@@ -6,7 +6,7 @@ import {
 	InternalServerErrorException,
 	Middleware,
 	Post,
-	type APIRes,
+	type APIRes
 } from "sidra";
 import { supabaseClient } from "../libs/supabase";
 import { auth } from "../middlewares/auth";

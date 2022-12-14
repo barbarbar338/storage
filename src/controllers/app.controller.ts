@@ -3,12 +3,11 @@ import {
 	Controller,
 	Get,
 	HTTPStatus,
-	IRedirectRes,
-	NotFoundException,
-	Redirect,
-	type APIRes,
+	IRedirectRes, Middleware, NotFoundException,
+	Redirect, type APIRes
 } from "sidra";
 import { supabaseClient } from "../libs/supabase";
+import { auth } from "../middlewares/auth";
 
 @Controller()
 export class AppController {
@@ -16,6 +15,16 @@ export class AppController {
 	get(): APIRes<string> {
 		return {
 			data: "app",
+			message: "Hello, world!",
+			statusCode: HTTPStatus.OK,
+		};
+	}
+
+	@Middleware(auth)
+	@Get("/auth-test")
+	auth(): APIRes<string> {
+		return {
+			data: "auth successfull",
 			message: "Hello, world!",
 			statusCode: HTTPStatus.OK,
 		};
