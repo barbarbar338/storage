@@ -1,15 +1,14 @@
 {
-    "Version": "13.3.0",
-    "Name": "YOUR_DOMAIN_HERE",
+    "Version": "14.1.0",
     "DestinationType": "ImageUploader, FileUploader",
     "RequestMethod": "POST",
-    "RequestURL": "https://YOUR_DOMAIN_HERE/storage/upload",
+    "RequestURL": "https://DOMAIN/storage/upload",
     "Headers": {
-        "X-Storage-Username": "YOUR_STORAGE_USERNAME",
-        "X-Storage-Password": "YOUR_STORAGE_PASSWORD"
+        "X-Storage-Username": "STORAGE_USERNAME",
+        "X-Storage-Password": "STORAGE_PASSWORD"
     },
     "Body": "MultipartFormData",
     "FileFormName": "file",
-    "URL": "$json:data$",
-    "ErrorMessage": "$json:message$"
+    "URL": "{json:data}",
+    "ErrorMessage": "{json:message}"
 }
