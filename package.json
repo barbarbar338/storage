@@ -17,7 +17,8 @@
 		"dev": "wrangler dev",
 		"deploy": "wrangler publish",
 		"format": "prettier --write  .",
-		"lint": "eslint --max-warnings=0 . && prettier --check ."
+		"lint": "eslint --max-warnings=0 . && prettier --check .",
+		"update": "taze latest -w"
 	},
 	"eslintConfig": {
 		"root": true,
@@ -27,20 +28,20 @@
 		]
 	},
 	"devDependencies": {
-		"@cloudflare/workers-types": "^3.14.1",
-		"@typescript-eslint/eslint-plugin": "^5.32.0",
-		"@typescript-eslint/parser": "^5.32.0",
-		"eslint": "^8.21.0",
-		"eslint-config-prettier": "^8.5.0",
+		"@cloudflare/workers-types": "^4.20230115.0",
+		"@typescript-eslint/eslint-plugin": "^5.51.0",
+		"@typescript-eslint/parser": "^5.51.0",
+		"eslint": "^8.33.0",
+		"eslint-config-prettier": "^8.6.0",
 		"eslint-config-typescript": "^3.0.0",
-		"miniflare": "^2.6.0",
-		"prettier": "^2.7.1",
-		"taze": "^0.8.4",
-		"typescript": "^4.7.4",
-		"wrangler": "^2.0.24"
+		"miniflare": "^2.11.0",
+		"prettier": "^2.8.4",
+		"taze": "^0.8.5",
+		"typescript": "^4.9.5",
+		"wrangler": "^2.9.1"
 	},
 	"dependencies": {
-		"@supabase/supabase-js": "^2.1.3",
+		"@supabase/supabase-js": "^2.7.1",
 		"sidra": "^0.1.5"
 	}
 }
