@@ -8,7 +8,7 @@ import {
 	NotFoundException,
 	PayloadTooLargeException,
 	Post,
-	type APIRes
+	type APIRes,
 } from "sidra";
 import { decideFolder } from "../libs/decideFolder";
 import { Snowflake } from "../libs/snowflake";

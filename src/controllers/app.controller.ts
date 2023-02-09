@@ -3,8 +3,11 @@ import {
 	Controller,
 	Get,
 	HTTPStatus,
-	IRedirectRes, Middleware, NotFoundException,
-	Redirect, type APIRes
+	IRedirectRes,
+	Middleware,
+	NotFoundException,
+	Redirect,
+	type APIRes,
 } from "sidra";
 import { supabaseClient } from "../libs/supabase";
 import { auth } from "../middlewares/auth";
@@ -13,6 +16,7 @@ import { auth } from "../middlewares/auth";
 export class AppController {
 	@Get()
 	get(): APIRes<string> {
+		console.log("cors skipped");
 		return {
 			data: "app",
 			message: "Hello, world!",

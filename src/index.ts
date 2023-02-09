@@ -14,12 +14,15 @@ declare global {
 	const DISCORD_WEBHOOK_URL: string;
 }
 
-const handler = Handle([
-	StorageController,
-	ShortenController,
-	BookmarkController,
-	AppController,
-]);
+const handler = Handle(
+	[StorageController, ShortenController, BookmarkController, AppController],
+	{
+		allowedHeaders: "Content-Type, Authorization",
+		methods: "GET, POST, OPTIONS",
+		origin: "*",
+		maxAge: 86400,
+	},
+);
 
 addEventListener("fetch", (event: FetchEvent) =>
 	event.respondWith(handler(event.request)),

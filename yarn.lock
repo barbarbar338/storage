@@ -1606,10 +1606,15 @@ itty-router-extras@^0.4.2:
   resolved "https://registry.yarnpkg.com/itty-router-extras/-/itty-router-extras-0.4.2.tgz#e46891ebea63f09ada74603649d8a6c4ce0c5df7"
   integrity sha512-ppHaBzcTXs7idFSDISehG+8kif2/4aqLCfyY/Y/uIZv79sfEfNmTq9G+rDeqblun/VZRBiXZD8ztYmMS8EOsKw==
 
-itty-router@^2.3.10, itty-router@^2.6.6:
+itty-router@^2.3.10:
   version "2.6.6"
   resolved "https://registry.yarnpkg.com/itty-router/-/itty-router-2.6.6.tgz#78a08c3b7dc1bd90ce832cae8eff7e4cbfbf67ef"
   integrity sha512-hIPHtXGymCX7Lzb2I4G6JgZFE4QEEQwst9GORK7sMYUpJvLfy4yZJr95r04e8DzoAnj6HcxM2m4TbK+juu+18g==
+
+itty-router@^3.0.11:
+  version "3.0.11"
+  resolved "https://registry.yarnpkg.com/itty-router/-/itty-router-3.0.11.tgz#256c2ef0a12721a839656f49db640d40ed2fb308"
+  integrity sha512-vWsoHBi2CmU15YzyUeHjRfjdySL2jqZQKA9jP1LXkBcLJAo0KQNVlQMvhtzG0mzABhVYifeBF97UkrrpuTCWYQ==
 
 jiti@^1.16.0:
   version "1.16.0"
@@ -2412,13 +2417,13 @@ shebang-regex@^3.0.0:
   resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-3.0.0.tgz#ae16f1644d873ecad843b0307b143362d4c42172"
   integrity sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==
 
-sidra@^0.1.5:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/sidra/-/sidra-0.1.5.tgz#7f9a61fb80f2f4c848c4bb72ac74c64c6770cf05"
-  integrity sha512-ISKE8BpByEmTppsSgBJeZ5mNtDvz370MMkk2gQflfx8/UZ6pyw7VYrq7JzzwiFcLcKAqW3XEuunDwQmpQ2Ks6g==
+sidra@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/sidra/-/sidra-0.1.7.tgz#1cc0c6971f57c10f257382d822da040d1a52c3ba"
+  integrity sha512-kQp0uaKdyLFbjDAK5fO/eT4sW/hCtwCKx62ZmJhyMiIs0+VjygfTq7+SlZM6vSbu5OU3xGf7YNEaKydvcJVWpg==
   dependencies:
     "@types/itty-router-extras" "^0.4.0"
-    itty-router "^2.6.6"
+    itty-router "^3.0.11"
     itty-router-extras "^0.4.2"
     reflect-metadata "^0.1.13"
 

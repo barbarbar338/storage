@@ -42,6 +42,6 @@
 	},
 	"dependencies": {
 		"@supabase/supabase-js": "^2.7.1",
-		"sidra": "^0.1.5"
+		"sidra": "^0.1.7"
 	}
 }

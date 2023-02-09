@@ -7,7 +7,7 @@ import {
 	InternalServerErrorException,
 	Middleware,
 	Post,
-	type APIRes
+	type APIRes,
 } from "sidra";
 import { Snowflake } from "../libs/snowflake";
 import { supabaseClient } from "../libs/supabase";
