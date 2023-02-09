@@ -48,8 +48,9 @@ export class StorageController {
 
 		if (!formData.has("file")) throw new BadRequestException("no file");
 
-		const file = formData.get("file");
-		if (!(file instanceof File)) throw new BadRequestException("no file");
+		const file = formData.get("file") as unknown as File;
+		if (!file || typeof file == "string" || !(file instanceof File))
+			throw new BadRequestException("no file");
 
 		if (file.size > parseInt(MAX_FILE_SIZE))
 			throw new PayloadTooLargeException("file too large");

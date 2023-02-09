@@ -1,4 +1,4 @@
-import { type Request } from "itty-router";
+import { type IRequest } from "itty-router";
 import {
 	Controller,
 	Get,
@@ -36,7 +36,7 @@ export class AppController {
 
 	@Redirect()
 	@Get("/:code")
-	async getCode(req: Request): Promise<IRedirectRes> {
+	async getCode(req: IRequest): Promise<IRedirectRes> {
 		const code = req.params?.code as string;
 
 		const { data: codeExists } = await supabaseClient
