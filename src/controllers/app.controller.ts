@@ -15,7 +15,7 @@ import { auth } from "../middlewares/auth";
 @Controller()
 export class AppController {
 	@Redirect()
-	@Get("/:code")
+	@Get()
 	get(): IRedirectRes {
 		return {
 			statusCode: HTTPStatus.FOUND,
