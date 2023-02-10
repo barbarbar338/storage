@@ -3,24 +3,23 @@ import {
 	Controller,
 	Get,
 	HTTPStatus,
-	IRedirectRes,
 	Middleware,
 	NotFoundException,
 	Redirect,
 	type APIRes,
+	type IRedirectRes,
 } from "sidra";
 import { supabaseClient } from "../libs/supabase";
 import { auth } from "../middlewares/auth";
 
 @Controller()
 export class AppController {
-	@Get()
-	get(): APIRes<string> {
-		console.log("cors skipped");
+	@Redirect()
+	@Get("/:code")
+	get(): IRedirectRes {
 		return {
-			data: "app",
-			message: "Hello, world!",
-			statusCode: HTTPStatus.OK,
+			statusCode: HTTPStatus.FOUND,
+			to: "https://github.com/barbarbar338/storage",
 		};
 	}
 

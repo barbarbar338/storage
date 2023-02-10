@@ -1,6 +1,6 @@
 {
 	"name": "storage-worker",
-	"version": "2.1.0",
+	"version": "2.1.1",
 	"description": "📦 Cloudflare worker for my personal storage",
 	"author": {
 		"email": "hi@338.rocks",
@@ -11,7 +11,7 @@
 	"license": "GPL-3.0",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/barisbored/storage"
+		"url": "https://github.com/barbarbar338/storage"
 	},
 	"scripts": {
 		"dev": "wrangler dev",

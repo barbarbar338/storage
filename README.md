@@ -4,7 +4,7 @@ A system where you can share your files publicly on the internet. Upload your fi
 
 -   Depends on [Supabase](https://supabase.io/) storage
 -   Hosted on [Cloudflare Workers](https://workers.cloudflare.com/)
--   Chrome extension: [Click!](https://github.com/barisbored/storage-chrome-extension)
+-   Chrome extension: [Click!](https://github.com/barbarbar338/storage-chrome-extension)
 
 # 🎁 Example
 
