@@ -1,4 +1,3 @@
-dist
 node_modules
-transpiled
-/.idea/
+*lock*
+*.env*

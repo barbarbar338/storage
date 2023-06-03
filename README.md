@@ -3,7 +3,7 @@
 A system where you can share your files publicly on the internet. Upload your files and share them with anyone with a permanent url!
 
 -   Depends on [Supabase](https://supabase.io/) storage
--   Hosted on [Cloudflare Workers](https://workers.cloudflare.com/)
+-   Hosted on [Lagon](https://lagon.app)
 -   Chrome extension: [Click!](https://github.com/barbarbar338/storage-chrome-extension)
 
 # 🎁 Example
@@ -15,11 +15,11 @@ A system where you can share your files publicly on the internet. Upload your fi
 
 -   Setup your Supabase storage (see instructions below)
 -   Setup your Supabase tables (see instructions below)
--   Setup your Cloudflare Workers (see instructions below)
+-   Setup your Lagon function (see instructions below)
 -   Clone repo
 -   Run `yarn` or `npm i`
 -   Run `yarn dev` or `npm run dev` to start development server
--   Run `yarn deploy` or `npm run deploy` to deploy project to Cloudflare Workers
+-   Run `yarn deploy` or `npm run deploy` to deploy project to Lagon
 
 # ⚡️ Supabase Storage Setup
 
@@ -65,7 +65,7 @@ updatedAt: timestampz @now
 
 ![Bookmarks Table](https://worker.338.rocks/storage/uploads/images/374535790522400768.png)
 
-# ⚡️ Cloudflare Setup
+# ⚡️ Lagon Setup
 
 Create these environment variables:
 
