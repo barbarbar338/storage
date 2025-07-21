@@ -1,7 +1,9 @@
 main = "./src/index.ts"
 name = "storage-worker"
-compatibility_date = "2022-12-09"
+compatibility_date = "2024-09-23"
+
+[observability.logs]
+enabled = true
 
 [vars]
 BASE_URL = "https://worker.338.rocks"
-MAX_FILE_SIZE = "100000000" # 100MB in bytes

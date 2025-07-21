@@ -1,47 +1,35 @@
 {
-	"name": "storage-worker",
-	"version": "2.1.1",
-	"description": "📦 Cloudflare worker for my personal storage",
 	"author": {
 		"email": "hi@338.rocks",
 		"name": "Barış DEMİRCİ",
 		"url": "https://338.rocks"
 	},
-	"private": true,
+	"dependencies": {
+		"aws4fetch": "^1.0.20",
+		"sidra": "^0.1.7"
+	},
+	"description": "📦 Cloudflare worker for my personal storage",
+	"devDependencies": {
+		"@cloudflare/workers-types": "^4.20250719.0",
+		"@typescript-eslint/eslint-plugin": "^8.37.0",
+		"@typescript-eslint/parser": "^8.37.0",
+		"prettier": "^3.6.2",
+		"taze": "^19.1.0",
+		"typescript": "^5.8.3",
+		"wrangler": "^4.25.0"
+	},
 	"license": "GPL-3.0",
+	"name": "storage-worker",
+	"private": true,
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/barbarbar338/storage"
+		"url": "git+https://github.com/barbarbar338/storage.git"
 	},
 	"scripts": {
+		"deploy": "wrangler deploy",
 		"dev": "wrangler dev",
-		"deploy": "wrangler publish",
-		"format": "prettier --write  .",
-		"lint": "eslint --max-warnings=0 . && prettier --check .",
+		"format": "prettier --write .",
 		"update": "taze latest -w"
 	},
-	"eslintConfig": {
-		"root": true,
-		"extends": [
-			"typescript",
-			"prettier"
-		]
-	},
-	"devDependencies": {
-		"@cloudflare/workers-types": "^4.20230115.0",
-		"@typescript-eslint/eslint-plugin": "^5.51.0",
-		"@typescript-eslint/parser": "^5.51.0",
-		"eslint": "^8.33.0",
-		"eslint-config-prettier": "^8.6.0",
-		"eslint-config-typescript": "^3.0.0",
-		"miniflare": "^2.11.0",
-		"prettier": "^2.8.4",
-		"taze": "^0.8.5",
-		"typescript": "^4.9.5",
-		"wrangler": "^2.9.1"
-	},
-	"dependencies": {
-		"@supabase/supabase-js": "^2.7.1",
-		"sidra": "^0.1.7"
-	}
+	"version": "3.0.0"
 }

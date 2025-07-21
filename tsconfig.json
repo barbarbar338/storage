@@ -1,24 +1,24 @@
 {
-	"include": ["src"],
-	"exclude": ["node_modules", "dist"],
 	"compilerOptions": {
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
+		"checkJs": false,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"forceConsistentCasingInFileNames": true,
 		"incremental": true,
-		"target": "es2021",
-		"lib": ["es2021"],
+		"isolatedModules": true,
 		"jsx": "react",
+		"lib": ["es2021"],
 		"module": "es2022",
 		"moduleResolution": "node",
-		"types": ["@cloudflare/workers-types"],
-		"resolveJsonModule": true,
-		"allowJs": true,
-		"checkJs": false,
 		"noEmit": true,
-		"isolatedModules": true,
-		"allowSyntheticDefaultImports": true,
-		"forceConsistentCasingInFileNames": true,
-		"strict": true,
+		"resolveJsonModule": true,
 		"skipLibCheck": true,
-		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true
-	}
+		"strict": true,
+		"target": "es2021",
+		"types": ["@cloudflare/workers-types"]
+	},
+	"exclude": ["node_modules", "dist"],
+	"include": ["src"]
 }

@@ -1,5 +1,5 @@
 {
-    "Version": "14.1.0",
+    "Version": "18.0.0",
     "DestinationType": "ImageUploader, FileUploader",
     "RequestMethod": "POST",
     "RequestURL": "https://DOMAIN/storage/upload",
