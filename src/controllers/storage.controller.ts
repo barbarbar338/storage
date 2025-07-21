@@ -70,8 +70,8 @@ export function createStorageController(env: Env, aws: AwsClient) {
 
 			if (!upload.ok) throw new BadRequestException("upload failed");
 
-			return {
-				data: `${env.BASE_URL}/storage/uploads/${path}`,
+			https: return {
+				data: `${env.MINIO_CONSOLE_HOST}/${env.MINIO_BUCKET_NAME}/${path}`,
 				message: "file uploaded",
 				statusCode: HTTPStatus.CREATED,
 			};
